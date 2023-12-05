@@ -1,3 +1,20 @@
+# 用户使用主界面
+使用以下内容构建：
+
+axios：1.6.2
+
+cesium：1.112.0
+
+pinia：2.1.7
+
+vite-plugin-cesium：1.2.22
+
+vue：3.3.4
+
+vue-router：4.2.5
+
+TypeScript
+
 # Business
 
 This template should help get you started developing with Vue 3 in Vite.

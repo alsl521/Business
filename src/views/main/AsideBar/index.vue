@@ -1,53 +1,64 @@
 <template>
-  <el-menu
-      active-text-color="#ffd04b"
-      background-color="#545c64"
-      class="el-menu-vertical-demo"
-      default-active="2"
-      text-color="#fff"
-      @open="handleOpen"
-      @close="handleClose"
-  >
-    <el-sub-menu index="1">
-      <template #title>
-        <span>Navigator One</span>
-      </template>
-      <el-menu-item-group title="Group One">
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title>item four</template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="2">
-      <span>Navigator Two</span>
-    </el-menu-item>
-    <el-menu-item index="3">
-      <span>Navigator Three</span>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <span>Navigator Four</span>
-    </el-menu-item>
-  </el-menu>
+  <div>
+    <el-scrollbar class="scrollbar">
+      <el-menu text-color="#fff"
+               background-color="#006d87"
+               class="el-menu-vertical-demo">
+        <Menu :menuList="menuStore.selectModelsContent"></Menu>
+      </el-menu>
+    </el-scrollbar>
+  </div>
+
+  <el-dialog v-model="menuStore.dialogTableVisible" destroy-on-close>
+    <template #header="{ titleId, titleClass }">
+      <div class="my-header">
+        <h4>{{ menuStore.titleHeader }}</h4>
+      </div>
+    </template>
+    <UpLoadFile :ModelName="menuStore.ModelName " :MenuName="menuStore.MenuName"
+                :FileType="menuStore.FileType"></UpLoadFile>
+
+  </el-dialog>
 </template>
 
-<script lang="ts" setup>
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+<script lang="ts" setup name="AsideBar">
+import Menu from "../AsideBar/menu/index.vue"
+import {useMenuStore} from "@/stores/modules/MenuStore";
+import {ElMessage} from "element-plus";
+import {onMounted} from "vue";
+import UpLoadFile from "@/components/UpLoadFile/index.vue"
+
+const menuStore = useMenuStore();//使用menuStore
+
+//获取所有菜单名称
+async function getSelectModels() {
+
+  let formData = new FormData();
+  formData.append('ModelName1', 'MODFLOW');
+  formData.append('ModelName2', 'EFDC');
+  formData.append('ModelName3', 'SWMM');
+
+  let code = await menuStore.selectModels(formData)
+  if (code == 1) {
+    console.log(menuStore.selectModelsContent)
+    ElMessage.success('导入数据成功！');
+  } else {
+    ElMessage.error('导入数据失败，请您重新上传！');
+  }
 }
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
+
+//获取所有菜单名称
+onMounted(() => {
+  getSelectModels()
+})
+
+
 </script>
 
 <style scoped lang="scss">
-.el-menu{
+.scrollbar {
   width: 200px;
+  height: calc(100vh - 60px);
+  background: #006d87;
 }
-
 </style>

@@ -121,14 +121,14 @@ onBeforeUnmount(() => {//卸载
 <style scoped lang="scss">
 
 .vtk-render-container {
-  width: calc(100vw - 200px);
+  width: calc(100vw - 250px);
   height: calc(100vh - 100px);
 }
 
 .controls {
   position: absolute;
   top: 100px;
-  left: 200px;
+  left: 250px;
   background: white;
   margin: 20px;
 }

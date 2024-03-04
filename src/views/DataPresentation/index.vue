@@ -1,10 +1,10 @@
 <template>
-<!--  <div></div>-->
+  <!--  <div></div>-->
   <div id="main" class="showData"></div>
 </template>
 
 <script setup lang="ts" name="DataPresentation">
-import {ref, onMounted, onBeforeUnmount, onUnmounted} from "vue";
+import {ref, onMounted, onBeforeUnmount} from "vue";
 import * as echarts from "echarts";
 
 type EChartsOption = echarts.EChartsOption;
@@ -101,6 +101,6 @@ onBeforeUnmount(() => {
 <style scoped>
 .showData {
   height: calc(100vh - 100px);
-  width: calc(100vw - 200px);
+  width: calc(100vw - 250px);
 }
 </style>

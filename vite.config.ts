@@ -9,7 +9,7 @@ import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 export default defineConfig({
     base: './',
     plugins: [
-        vue(), Cesium(),VueSetupExtend()
+        vue(), Cesium(), VueSetupExtend()
     ],
     server: {
         host: '0.0.0.0',

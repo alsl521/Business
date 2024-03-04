@@ -1,6 +1,6 @@
 import Main from "@/views/main/index.vue";
 import twoDimensionalMap from "@/views/TwoDimensionalMap/index.vue";
-import threeDimensionalMap from "@/views/ThreeDimensionalMap/index.vue";
+import threeDimensionalMap from "@/views/VTKScientificVisualization/index.vue";
 import dataPresentation from "@/views/DataPresentation/index.vue";
 
 export const constantRoutes = [
@@ -16,7 +16,7 @@ export const constantRoutes = [
                 component: twoDimensionalMap,
             },
             {
-                path: 'ThreeDimensionalMap',
+                path: 'VTKScientificVisualization',
                 component: threeDimensionalMap,
             },
             {

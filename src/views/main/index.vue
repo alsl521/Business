@@ -9,30 +9,29 @@
 
     <el-container>
       <!--  左侧  -->
-      <AsideBar></AsideBar>
+      <AsideBar></AsideBar> <!-- 引入侧边栏组件 -->
 
       <!--  主要视图，用于展示  -->
       <el-main class="main">
 
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-
-          <!-- 路由跳转-->
+          <!-- 路由跳转 -->
           <el-menu-item index="1">
             地图展示
           </el-menu-item>
 
-          <!-- 路由跳转-->
+          <!-- 路由跳转 -->
           <el-menu-item index="2">
             科学可视化
           </el-menu-item>
 
-          <!-- 路由跳转-->
+          <!-- 路由跳转 -->
           <el-menu-item index="3">
             数据可视化
           </el-menu-item>
         </el-menu>
 
-        <router-view></router-view>
+        <router-view></router-view> <!-- 渲染路由组件的位置 -->
       </el-main>
 
     </el-container>
@@ -42,43 +41,61 @@
 
 
 <script setup lang="ts" name="MainPage">
-import AsideBar from './AsideBar/index.vue'
-import {useRouter, useRoute} from 'vue-router'
-import {onMounted, ref} from "vue";
+import AsideBar from './AsideBar/index.vue' // 引入侧边栏组件
+import {useRouter, useRoute} from 'vue-router' // 引入Vue Router中的钩子函数
+import {onMounted, ref} from "vue"; // 引入Vue中的钩子函数
 
-const activeIndex = ref('1')//激活的按钮
-const router = useRouter()//router是VueRouter的一个对象，通过Vue.use(VueRouter)和VueRouter构造函数得到一个router的实例对象，这个对象中是一个全局的对象，包含了所有的路由包含了许多关键的对象和属性。
-const route = useRoute()// route是一个跳转的路由对象，每一个路由都会有一个route对象，是一个局部的对象，可以获取对应的name,path,params,query等
+// 激活的按钮,使用ref创建响应式数据
+const activeIndex = ref('1')
 
-//确定默认激活的按钮
-function setActiveIndex(){
+// Vue Router实例对象
+const router = useRouter()
+
+// 当前路由对象
+const route = useRoute()
+
+// 确定默认激活的按钮
+function setActiveIndex() {
+  //获取当前路由路径的第一个部分
   const routerIndex = route.path.split('/')[1]
+  // 如果路由为'TwoDimensionalMap'
   if (routerIndex === 'TwoDimensionalMap') {
+    //设置激活的按钮为1
     activeIndex.value = '1'
-  } else if (routerIndex === 'ThreeDimensionalMap') {
+    // 如果路由为'VTKScientificVisualization'
+  } else if (routerIndex === 'VTKScientificVisualization') {
+    //设置激活的按钮为2
     activeIndex.value = '2'
+    // 如果路由为'DataPresentation'
   } else if (routerIndex === 'DataPresentation') {
+    //设置激活的按钮为3
     activeIndex.value = '3'
   }
 }
 
-//依据激活的按钮推送到指定的路径
-function handleSelect(index) {
+// 根据激活的按钮跳转到指定的路径
+function handleSelect(index: any) {
+  // 如果激活的按钮为1
   if (index === '1') {
+    // 跳转到'/TwoDimensionalMap'路径
     router.push('/TwoDimensionalMap');
+    // 如果激活的按钮为2
   } else if (index === '2') {
-    router.push('/ThreeDimensionalMap');
+    // 跳转到'/VTKScientificVisualization'路径
+    router.push('/VTKScientificVisualization');
+    // 如果激活的按钮为3
   } else if (index === '3') {
+    // 跳转到'/DataPresentation'路径
     router.push('/DataPresentation');
   }
 }
 
-onMounted(()=>{
+onMounted(() => {
+  // 在组件挂载后调用设置默认激活的按钮函数
   setActiveIndex()
 })
-
-
 </script>
+
 
 <style scoped lang="scss">
 .container {
@@ -88,12 +105,12 @@ onMounted(()=>{
 }
 
 .aside {
-  width: 200px;
+  width: 250px;
   background: blue;
 }
 
 .main {
-  width: calc(100vw - 200px);
+  width: calc(100vw - 250px);
   height: calc(100vh - 60px);
   padding: 0 !important; //去除内边距
   .el-menu-demo {

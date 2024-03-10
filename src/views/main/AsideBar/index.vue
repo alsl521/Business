@@ -35,14 +35,14 @@
 
             <el-sub-menu index="1-2-2">
               <template #title>气象监测站点</template>
-              <el-menu-item index="1-2-2-1">大气压强</el-menu-item>
-              <el-menu-item index="1-2-2-2">蒸发量</el-menu-item>
-              <el-menu-item index="1-2-2-3">降雨量</el-menu-item>
-              <el-menu-item index="1-2-2-4">太阳辐射</el-menu-item>
-              <el-menu-item index="1-2-2-5">云量</el-menu-item>
-              <el-menu-item index="1-2-2-6">风速风向</el-menu-item>
-              <el-menu-item index="1-2-2-7">水温</el-menu-item>
-              <el-menu-item index="1-2-2-8">温度</el-menu-item>
+              <el-menu-item index="1-2-2-1">气温</el-menu-item>
+              <el-menu-item index="1-2-2-2">大气压强</el-menu-item>
+              <el-menu-item index="1-2-2-3">蒸发量</el-menu-item>
+              <el-menu-item index="1-2-2-4">降雨量</el-menu-item>
+              <el-menu-item index="1-2-2-5">太阳辐射</el-menu-item>
+              <el-menu-item index="1-2-2-6">云量</el-menu-item>
+              <el-menu-item index="1-2-2-7">风速风向</el-menu-item>
+              <el-menu-item index="1-2-2-8">水温</el-menu-item>
             </el-sub-menu>
           </el-sub-menu>
 

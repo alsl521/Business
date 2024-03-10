@@ -24,12 +24,35 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
     //进行额外操作
     getters: {},
 
-    //进行数据异步操作的地方
+    //进行数据操作的地方
     actions: {
+        //去除相同的数据
+        add_file_file(data: any) {
+            let isEqual = false;
+            this.uploadFiles.forEach((item, index) => {
+                isEqual = this.isScopeEqual(item.name, data.name);
+                if (isEqual) {
+                    this.uploadFiles[index] = data; // 替换 item
+                }
+            });
+
+            if (!isEqual) {
+                this.uploadFiles.push(data)
+            }
+        },
+
+        isScopeEqual(scope1: string, scope2: string): boolean {
+            const scope1Suffix = scope1.split('_')[1];
+            const scope2Suffix = scope2.split('_')[1];
+
+            return scope1Suffix === scope2Suffix;
+        },
+
+        //研究区范围
         async get_StudyAreaScope_Data() {
             let result: any = await get_StudyAreaScope(null)
             if (result.code == 1) {
-                this.uploadFiles.push(result.data)
+                this.add_file_file(result.data)
                 this.StudyAreaScopeDialogVisible = false
             }
         },
@@ -58,7 +81,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
         async publish_StudyAreaScope() {
             let result = await publish_StudyAreaScope(null)
             if (result.code == 1) {
-                this.uploadFiles.push(result.data)
+                this.add_file_file(result.data)
                 return result
             }
         },
@@ -67,7 +90,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
         async get_FlowRate_Data() {
             let result: any = await get_FlowRate(null)
             if (result.code == 1) {
-                this.uploadFiles.push(result.data)
+                this.add_file_file(result.data)
                 this.FLowRateDialogVisible = false
             }
         },
@@ -88,7 +111,6 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
 
         async update_FlowRate_Table(form: any) {
             let result = await update_FlowRate(form)
-            console.log(result)
             if (result.code == 1) {
                 return result
             }
@@ -97,7 +119,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
         async publish_FlowRate() {
             let result = await publish_FlowRate(null)
             if (result.code == 1) {
-                this.uploadFiles.push(result.data)
+                this.add_file_file(result.data)
                 return result
             }
         },

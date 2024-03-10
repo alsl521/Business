@@ -124,11 +124,11 @@
 
     <div v-if="showPages==3">
       <el-text size="large" type="primary">流量监测点属性表</el-text>
-      <el-table :data="shp_Data" style="width: 100%;margin-bottom: 20px;margin-top: 10px" border height="200">
-        <el-table-column prop="fid" label="Fid"/>
+      <el-table :data="shp_Data" style="width: 100%;margin-bottom: 20px;margin-top: 10px" border max-height="200">
+        <el-table-column prop="fid" label="Fid" width="100"/>
         <el-table-column prop="name" label="Name"/>
         <el-table-column prop="function" label="Function"/>
-        <el-table-column label="Operations">
+        <el-table-column label="Operations" width="120">
           <template #default="scope">
             <el-button type="primary" size="small"
                        @click="handle_Monitoring_Point_Attribute_Edit(scope.$index, scope.row)">
@@ -139,12 +139,12 @@
       </el-table>
 
       <el-text size="large" type="primary">流量观测记录表</el-text>
-      <el-table :data="observation_Data" style="width: 100%;margin-top: 10px" border height="200">
-        <el-table-column prop="fid" label="Fid"/>
+      <el-table :data="observation_Data" style="width: 100%;margin-top: 10px" border max-height="250">
+        <el-table-column prop="fid" label="Fid" width="100"/>
         <el-table-column prop="name" label="Name"/>
         <el-table-column prop="time" label="Time"/>
         <el-table-column prop="flow" label="FLOW(m^3/s)"/>
-        <el-table-column label="Operations">
+        <el-table-column label="Operations" width="120">
           <template #default="scope">
             <el-button type="primary" size="small" @click="handle_Observation_Data_Edit(scope.$index, scope.row)">
               Edit

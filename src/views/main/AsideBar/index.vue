@@ -35,14 +35,14 @@
 
             <el-sub-menu index="1-2-2">
               <template #title>气象监测站点</template>
-              <el-menu-item index="1-2-2-1">气温</el-menu-item>
-              <el-menu-item index="1-2-2-2">大气压强</el-menu-item>
-              <el-menu-item index="1-2-2-3">蒸发量</el-menu-item>
-              <el-menu-item index="1-2-2-4">降雨量</el-menu-item>
-              <el-menu-item index="1-2-2-5">太阳辐射</el-menu-item>
-              <el-menu-item index="1-2-2-6">云量</el-menu-item>
-              <el-menu-item index="1-2-2-7">风速风向</el-menu-item>
-              <el-menu-item index="1-2-2-8">水温</el-menu-item>
+              <el-menu-item index="1-2-2-1" @click="upLoadDialogStore.TemperatureDialogVisible=true">气温</el-menu-item>
+              <el-menu-item index="1-2-2-2" @click="upLoadDialogStore.AtmosphericPressureDialogVisible=true">大气压强</el-menu-item>
+              <el-menu-item index="1-2-2-3" @click="upLoadDialogStore.EvaporationDialogVisible=true">蒸发量</el-menu-item>
+              <el-menu-item index="1-2-2-4" @click="upLoadDialogStore.RainfallDialogVisible=true">降雨量</el-menu-item>
+              <el-menu-item index="1-2-2-5" @click="upLoadDialogStore.SolarRadiationDialogVisible=true">太阳辐射</el-menu-item>
+              <el-menu-item index="1-2-2-6" @click="upLoadDialogStore.CloudCoverDialogVisible=true">云量</el-menu-item>
+              <el-menu-item index="1-2-2-7" @click="upLoadDialogStore.WindSpeedAndDirectionDialogVisible=true">风速风向</el-menu-item>
+              <el-menu-item index="1-2-2-8" @click="upLoadDialogStore.WaterTemperatureDialogVisible=true">水温</el-menu-item>
             </el-sub-menu>
           </el-sub-menu>
 
@@ -185,6 +185,14 @@
 
   <StudyAreaScope v-if="upLoadDialogStore.StudyAreaScopeDialogVisible"></StudyAreaScope>
   <FlowRate v-if="upLoadDialogStore.FLowRateDialogVisible"></FlowRate>
+  <AtmosphericPressure v-if="upLoadDialogStore.AtmosphericPressureDialogVisible"></AtmosphericPressure>
+  <Evaporation v-if="upLoadDialogStore.EvaporationDialogVisible"></Evaporation>
+  <Temperature v-if="upLoadDialogStore.TemperatureDialogVisible"></Temperature>
+  <Rainfall v-if="upLoadDialogStore.RainfallDialogVisible"></Rainfall>
+  <SolarRadiation v-if="upLoadDialogStore.SolarRadiationDialogVisible"></SolarRadiation>
+  <CloudCover v-if="upLoadDialogStore.CloudCoverDialogVisible"></CloudCover>
+  <WindSpeedAndDirection v-if="upLoadDialogStore.WindSpeedAndDirectionDialogVisible"></WindSpeedAndDirection>
+  <WaterTemperature v-if="upLoadDialogStore.WaterTemperatureDialogVisible"></WaterTemperature>
 
 </template>
 
@@ -193,6 +201,14 @@ import {onMounted} from "vue"; // 引入Vue中的钩子函数
 import useUpLoadDialogStore from "@/stores/UpLoadFiles/UpLoadDialogStore";
 import StudyAreaScope from "@/components/UpLoadDialog/BasicDataService/BasicGeographicData/StudyAreaScope.vue";
 import FlowRate from "@/components/UpLoadDialog/BasicDataService/MonitoringData/RiverMonitoringStation/FlowRate.vue";
+import AtmosphericPressure from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/AtmosphericPressure.vue";
+import Evaporation from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/Evaporation.vue";
+import Temperature from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/Temperature.vue";
+import Rainfall from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/Rainfall.vue";
+import SolarRadiation from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/SolarRadiation.vue";
+import CloudCover from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/CloudCover.vue";
+import WindSpeedAndDirection from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/WindSpeedAndDirection.vue";
+import WaterTemperature from "@/components/UpLoadDialog/BasicDataService/MonitoringData/MeteorologyMonitoringStation/WaterTemperature.vue";
 
 // 使用UpLoadDialogStore
 const upLoadDialogStore = useUpLoadDialogStore();

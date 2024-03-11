@@ -71,16 +71,22 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
     actions: {
         //去除相同的数据
         add_file_file(data: any) {
-            let isEqual = false;
-            this.uploadFiles.forEach((item, index) => {
-                isEqual = this.isScopeEqual(item.name, data.name);
+
+            let foundMatch = false;
+
+            for (let index = 0; index < this.uploadFiles.length; index++) {
+                const layer = this.uploadFiles[index];
+                const isEqual = this.isScopeEqual(layer.name, data.name);
+
                 if (isEqual) {
                     this.uploadFiles[index] = data; // 替换 item
+                    foundMatch = true;
+                    break; // 退出循环
                 }
-            });
+            }
 
-            if (!isEqual) {
-                this.uploadFiles.push(data)
+            if (!foundMatch) {
+                this.uploadFiles.push(data);
             }
         },
 

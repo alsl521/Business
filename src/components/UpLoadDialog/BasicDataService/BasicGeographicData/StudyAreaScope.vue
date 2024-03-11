@@ -48,8 +48,8 @@
       <el-text class="mx-1" type="danger">*</el-text>
       <el-text class="mx-1" type="primary">为必选字段</el-text>
 
-      <el-form :model="form" label-width="100px" style="margin-top: 20px">
-        <el-form-item label="Name">
+      <el-form :model="form" label-width="140px" style="margin-top: 20px">
+        <el-form-item label="研究区名称">
           <el-select v-model="form.name" placeholder="请选择名称字段">
             <el-option
                 v-for="item in options"
@@ -60,7 +60,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Area(km^2)">
+        <el-form-item label="研究区面积(km^2)">
           <el-select v-model="form.area" placeholder="请选择面积字段">
             <el-option
                 v-for="item in options"
@@ -71,7 +71,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Length(km)">
+        <el-form-item label="研究区周长(km)">
           <el-select v-model="form.length" placeholder="请选择周长字段">
             <el-option
                 v-for="item in options"
@@ -92,11 +92,11 @@
 
     <div v-if="showPages==3">
       <el-table :data="tableData" style="width: 100%" border>
-        <el-table-column prop="fid" label="Fid"/>
-        <el-table-column prop="name" label="Name"/>
-        <el-table-column prop="area" label="Area(km^2)"/>
-        <el-table-column prop="length" label="Length(km)"/>
-        <el-table-column label="Operations">
+        <el-table-column prop="fid" label="序号"/>
+        <el-table-column prop="name" label="研究区名称"/>
+        <el-table-column prop="area" label="研究区面积(km^2)"/>
+        <el-table-column prop="length" label="研究区名称(km)"/>
+        <el-table-column label="修改">
           <template #default="scope">
             <el-button type="primary" size="small" @click="handleEdit(scope.$index, scope.row)">
               Edit
@@ -114,14 +114,14 @@
           title="研究区属性更改"
           append-to-body
       >
-        <el-form :model="formValue" label-width="120px" style="margin-top: 30px">
-          <el-form-item label="Name">
+        <el-form :model="formValue" label-width="140px" style="margin-top: 30px">
+          <el-form-item label="研究区名称">
             <el-input v-model="formValue.name"/>
           </el-form-item>
-          <el-form-item label="Area(km^2)">
+          <el-form-item label="研究区面积(km^2)">
             <el-input v-model="formValue.area"/>
           </el-form-item>
-          <el-form-item label="Length(km)">
+          <el-form-item label="研究区周长(km)">
             <el-input v-model="formValue.length"/>
           </el-form-item>
           <el-form-item>

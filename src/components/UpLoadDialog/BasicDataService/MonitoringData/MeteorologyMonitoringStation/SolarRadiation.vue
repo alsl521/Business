@@ -48,13 +48,13 @@
     </div>
 
     <div v-if="showPages==2">
-      <el-form ref="ruleFormRef" :model="form" label-width="120px" style="margin-top: 20px" :rules="rules">
+      <el-form ref="ruleFormRef" :model="form" label-width="140px" style="margin-top: 20px" :rules="rules">
         <el-form-item>
           <el-text class="mx-1" type="primary">请选择相对应的shp字段，</el-text>
           <el-text class="mx-1" type="danger">*</el-text>
           <el-text class="mx-1" type="primary">为必选字段</el-text>
         </el-form-item>
-        <el-form-item label="Name" prop="shp_name">
+        <el-form-item label="监测站点名称" prop="shp_name">
           <el-select v-model="form.shp_name" placeholder="请选择名称字段">
             <el-option
                 v-for="item in shp_options"
@@ -70,7 +70,7 @@
           <el-text class="mx-1" type="danger">*</el-text>
           <el-text class="mx-1" type="primary">为必选字段</el-text>
         </el-form-item>
-        <el-form-item label="Name" prop="observation_name">
+        <el-form-item label="监测站点名称" prop="observation_name">
           <el-select v-model="form.observation_name" placeholder="请选择名称字段">
             <el-option
                 v-for="item in file_options"
@@ -81,7 +81,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Time" prop="observation_time">
+        <el-form-item label="监测时间序列" prop="observation_time">
           <el-select v-model="form.observation_time" placeholder="请选择观测时间字段">
             <el-option
                 v-for="item in file_options"
@@ -92,7 +92,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="SR(W/m^2)" prop="observation_solarradiation">
+        <el-form-item label="太阳辐射(W/m^2)" prop="observation_solarradiation">
           <el-select v-model="form.observation_solarradiation" placeholder="请选择太阳辐射字段">
             <el-option
                 v-for="item in file_options"
@@ -113,10 +113,10 @@
 
     <div v-if="showPages==3">
       <el-text size="large" type="primary">太阳辐射监测点属性表</el-text>
-      <el-table :data="shp_Data" style="width: 100%;margin-bottom: 20px;margin-top: 10px" border height="200">
-        <el-table-column prop="fid" label="Fid"/>
-        <el-table-column prop="name" label="Name"/>
-        <el-table-column label="Operations">
+      <el-table :data="shp_Data" style="width: 100%;margin-bottom: 20px;margin-top: 10px" border max-height="200">
+        <el-table-column prop="fid" label="序号" width="100"/>
+        <el-table-column prop="name" label="监测站点名称"/>
+        <el-table-column label="编辑" width="100">
           <template #default="scope">
             <el-button type="primary" size="small"
                        @click="handle_Monitoring_Point_Attribute_Edit(scope.$index, scope.row)">
@@ -128,11 +128,11 @@
 
       <el-text size="large" type="primary">太阳辐射观测记录表</el-text>
       <el-table :data="observation_Data" style="width: 100%;margin-top: 10px" border height="200">
-        <el-table-column prop="fid" label="Fid"/>
-        <el-table-column prop="name" label="Name"/>
-        <el-table-column prop="time" label="Time"/>
-        <el-table-column prop="solarradiation" label="SR(W/m^2)"/>
-        <el-table-column label="Operations">
+        <el-table-column prop="fid" label="序号" width="100"/>
+        <el-table-column prop="name" label="监测站点名称"/>
+        <el-table-column prop="time" label="检测时间序列"/>
+        <el-table-column prop="solarradiation" label="太阳辐射(W/m^2)"/>
+        <el-table-column label="编辑" width="100">
           <template #default="scope">
             <el-button type="primary" size="small" @click="handle_Observation_Data_Edit(scope.$index, scope.row)">
               Edit
@@ -156,7 +156,7 @@
 
         <el-form :model="Monitoring_Point_Attribute_Modification_FormValue" label-width="120px"
                  style="margin-top: 30px">
-          <el-form-item label="Name">
+          <el-form-item label="监测站点名称">
             <el-input v-model="Monitoring_Point_Attribute_Modification_FormValue.name"/>
           </el-form-item>
           <el-form-item>
@@ -174,15 +174,15 @@
           destroy-on-close
       >
 
-        <el-form :model="Observation_Data_Modification_FormValue" label-width="120px" style="margin-top: 30px">
-          <el-form-item label="Name">
+        <el-form :model="Observation_Data_Modification_FormValue" label-width="140px" style="margin-top: 30px">
+          <el-form-item label="监测站点名称">
             <el-input v-model="Observation_Data_Modification_FormValue.name"/>
           </el-form-item>
-          <el-form-item label="Time">
+          <el-form-item label="监测时间序列">
             <el-input v-model="Observation_Data_Modification_FormValue.time"/>
           </el-form-item>
-          <el-form-item label="SR(W/m^2)">
-            <el-input v-model="Observation_Data_Modification_FormValue.SolarRadiation"/>
+          <el-form-item label="太阳辐射(W/m^2)">
+            <el-input v-model="Observation_Data_Modification_FormValue.solarradiation"/>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="updateLocal">修改</el-button>
@@ -334,7 +334,7 @@ const Observation_Data_Modification_FormValue: any = reactive({
   FormName: 'Observation_Data',
   name: '',
   time: '',
-  SolarRadiation: '',
+  solarradiation: '',
   fid: '',
   index: 0,
 })
@@ -351,7 +351,7 @@ const handle_Observation_Data_Edit = (index: number, row: any) => {
   Observation_Data_Modification_FormValue.fid = row.fid
   Observation_Data_Modification_FormValue.name = row.name
   Observation_Data_Modification_FormValue.time = row.time
-  Observation_Data_Modification_FormValue.SolarRadiation = row.SolarRadiation
+  Observation_Data_Modification_FormValue.solarradiation = row.solarradiation
   Observation_Data_Modification_Visible.value = true
 }
 
@@ -370,7 +370,7 @@ const updateLocal = async () => {
   } else if (Observation_Data_Modification_Visible.value == true) {
     observation_Data.value[Observation_Data_Modification_FormValue.index].name = Observation_Data_Modification_FormValue.name
     observation_Data.value[Observation_Data_Modification_FormValue.index].time = Observation_Data_Modification_FormValue.time
-    observation_Data.value[Observation_Data_Modification_FormValue.index].SolarRadiation = Observation_Data_Modification_FormValue.SolarRadiation
+    observation_Data.value[Observation_Data_Modification_FormValue.index].solarradiation = Observation_Data_Modification_FormValue.solarradiation
 
     let result: any = await upLoadDialogStore.update_SolarRadiation_Table(Observation_Data_Modification_FormValue)
     if (result.code == 1) {

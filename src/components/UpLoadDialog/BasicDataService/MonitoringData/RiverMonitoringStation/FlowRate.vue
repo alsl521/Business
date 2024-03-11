@@ -3,7 +3,7 @@
     <!-- 自定义标题栏 -->
     <template #header="{ titleId, titleClass }">
       <div class="my-header">
-        <h4>{{ "河流监测站点" }}</h4>
+        <h4>{{ "河流监测站点-流量" }}</h4>
       </div>
     </template>
 
@@ -54,7 +54,7 @@
           <el-text class="mx-1" type="danger">*</el-text>
           <el-text class="mx-1" type="primary">为必选字段</el-text>
         </el-form-item>
-        <el-form-item label="Name" prop="shp_name">
+        <el-form-item label="监测站点名称" prop="shp_name">
           <el-select v-model="form.shp_name" placeholder="请选择名称字段">
             <el-option
                 v-for="item in shp_options"
@@ -65,7 +65,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Function" prop="shp_function">
+        <el-form-item label="监测站点功能" prop="shp_function">
           <el-select v-model="form.shp_function" placeholder="请选择功能字段">
             <el-option
                 v-for="item in shp_options"
@@ -81,7 +81,7 @@
           <el-text class="mx-1" type="danger">*</el-text>
           <el-text class="mx-1" type="primary">为必选字段</el-text>
         </el-form-item>
-        <el-form-item label="Name" prop="observation_name">
+        <el-form-item label="监测站点名称" prop="observation_name">
           <el-select v-model="form.observation_name" placeholder="请选择名称字段">
             <el-option
                 v-for="item in file_options"
@@ -92,7 +92,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Time" prop="observation_time">
+        <el-form-item label="监测时间序列" prop="observation_time">
           <el-select v-model="form.observation_time" placeholder="请选择观测时间字段">
             <el-option
                 v-for="item in file_options"
@@ -103,7 +103,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Flow(m^3/s)" prop="observation_flow">
+        <el-form-item label="流量(m^3/s)" prop="observation_flow">
           <el-select v-model="form.observation_flow" placeholder="请选择流量字段">
             <el-option
                 v-for="item in file_options"
@@ -125,10 +125,10 @@
     <div v-if="showPages==3">
       <el-text size="large" type="primary">流量监测点属性表</el-text>
       <el-table :data="shp_Data" style="width: 100%;margin-bottom: 20px;margin-top: 10px" border max-height="200">
-        <el-table-column prop="fid" label="Fid" width="100"/>
-        <el-table-column prop="name" label="Name"/>
-        <el-table-column prop="function" label="Function"/>
-        <el-table-column label="Operations" width="120">
+        <el-table-column prop="fid" label="序号" width="100"/>
+        <el-table-column prop="name" label="检测站点名称"/>
+        <el-table-column prop="function" label="检测站点功能"/>
+        <el-table-column label="编辑" width="100">
           <template #default="scope">
             <el-button type="primary" size="small"
                        @click="handle_Monitoring_Point_Attribute_Edit(scope.$index, scope.row)">
@@ -140,11 +140,11 @@
 
       <el-text size="large" type="primary">流量观测记录表</el-text>
       <el-table :data="observation_Data" style="width: 100%;margin-top: 10px" border max-height="250">
-        <el-table-column prop="fid" label="Fid" width="100"/>
-        <el-table-column prop="name" label="Name"/>
-        <el-table-column prop="time" label="Time"/>
-        <el-table-column prop="flow" label="FLOW(m^3/s)"/>
-        <el-table-column label="Operations" width="120">
+        <el-table-column prop="fid" label="序号" width="100"/>
+        <el-table-column prop="name" label="检测站点名称"/>
+        <el-table-column prop="time" label="检测时间序列"/>
+        <el-table-column prop="flow" label="流量(m^3/s)"/>
+        <el-table-column label="编辑" width="100">
           <template #default="scope">
             <el-button type="primary" size="small" @click="handle_Observation_Data_Edit(scope.$index, scope.row)">
               Edit
@@ -336,7 +336,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
         observation_Data.value = result.data.observation_data
       }
     } else {
-      console.log('error submit!')
       return false
     }
   })

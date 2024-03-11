@@ -118,8 +118,6 @@ const showLayersFromUpLoadFiles = async () => {
 
 const stopWatch = watch(upLoadDialogStore.uploadFiles, (newValue, oldValue) => {
 
-  mapLayerStore.increment(newValue)
-
   let urls = newValue[newValue.length - 1].url.replace("http://localhost:8080", "/GeoServer");
   let layersName = "ModelCoupling:" + newValue[newValue.length - 1].name
   const wms = new Cesium.WebMapServiceImageryProvider({
@@ -140,6 +138,7 @@ const stopWatch = watch(upLoadDialogStore.uploadFiles, (newValue, oldValue) => {
     destination: Cesium.Rectangle.fromDegrees(110, 33.5, 118, 36.5)
   });
 
+  mapLayerStore.increment(newValue[newValue.length - 1])
 
 }, {deep: true})
 

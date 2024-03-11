@@ -1,17 +1,49 @@
 //用于展示对话框
 import {defineStore} from 'pinia'
 import {
-    get_StudyAreaScope,upLoad_StudyAreaScope,create_StudyAreaScope,update_StudyAreaScope,publish_StudyAreaScope,
-    get_FlowRate,upLoad_FlowRate, create_FlowRate, update_FlowRate, publish_FlowRate, 
-    get_AtmosphericPressure,upLoad_AtmosphericPressure,create_AtmosphericPressure, update_AtmosphericPressure, publish_AtmosphericPressure, 
-    get_Evaporation,upLoad_Evaporation,create_Evaporation, update_Evaporation, publish_Evaporation, 
-    get_Temperature,upLoad_Temperature,create_Temperature, update_Temperature, publish_Temperature, 
-    get_Rainfall,upLoad_Rainfall,create_Rainfall, update_Rainfall, publish_Rainfall, 
-    get_SolarRadiation,upLoad_SolarRadiation,create_SolarRadiation, update_SolarRadiation, publish_SolarRadiation, 
-    get_CloudCover,upLoad_CloudCover,create_CloudCover, update_CloudCover, publish_CloudCover, 
-    get_WindSpeedAndDirection,upLoad_WindSpeedAndDirection,create_WindSpeedAndDirection, update_WindSpeedAndDirection, publish_WindSpeedAndDirection, 
-    get_WaterTemperature,upLoad_WaterTemperature,create_WaterTemperature, update_WaterTemperature, publish_WaterTemperature, 
+    get_StudyAreaScope,
+    upLoad_StudyAreaScope,
+    create_StudyAreaScope,
+    update_StudyAreaScope,
+    publish_StudyAreaScope,
 } from "@/api/UpLoadFiles/BasicDataService/BasicGeographicData";
+import {
+    create_FlowRate,
+    get_FlowRate, publish_FlowRate, update_FlowRate,
+    upLoad_FlowRate
+} from "@/api/UpLoadFiles/BasicDataService/MonitoringData/RiverMonitoringStation";
+import {
+    create_AtmosphericPressure,
+    create_CloudCover,
+    create_Evaporation,
+    create_Rainfall,
+    create_SolarRadiation,
+    create_Temperature, create_WaterTemperature, create_WindSpeedAndDirection,
+    get_AtmosphericPressure,
+    get_CloudCover,
+    get_Evaporation,
+    get_Rainfall,
+    get_SolarRadiation,
+    get_Temperature, get_WaterTemperature, get_WindSpeedAndDirection,
+    publish_AtmosphericPressure,
+    publish_CloudCover,
+    publish_Evaporation,
+    publish_Rainfall,
+    publish_SolarRadiation,
+    publish_Temperature, publish_WaterTemperature, publish_WindSpeedAndDirection,
+    update_AtmosphericPressure,
+    update_CloudCover,
+    update_Evaporation,
+    update_Rainfall,
+    update_SolarRadiation,
+    update_Temperature, update_WaterTemperature, update_WindSpeedAndDirection,
+    upLoad_AtmosphericPressure,
+    upLoad_CloudCover,
+    upLoad_Evaporation,
+    upLoad_Rainfall,
+    upLoad_SolarRadiation,
+    upLoad_Temperature, upLoad_WaterTemperature, upLoad_WindSpeedAndDirection
+} from "@/api/UpLoadFiles/BasicDataService/MonitoringData/MeteorologyMonitoringStation";
 
 let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
     //存储数据的地方
@@ -89,7 +121,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_StudyAreaScope() {
+        async publish_StudyAreaScope_Data() {
             let result = await publish_StudyAreaScope(null)
             if (result.code == 1) {
                 this.add_file_file(result.data)
@@ -127,7 +159,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_FlowRate() {
+        async publish_FlowRate_Data() {
             let result = await publish_FlowRate(null)
             if (result.code == 1) {
                 this.add_file_file(result.data)
@@ -166,14 +198,14 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_AtmosphericPressure() {
+        async publish_AtmosphericPressure_Data() {
             let result = await publish_AtmosphericPressure(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)
                 return result
             }
         },
-    
+
         //蒸发量
         async get_Evaporation_Data() {
             let result: any = await get_Evaporation(null)
@@ -205,7 +237,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_Evaporation() {
+        async publish_Evaporation_Data() {
             let result = await publish_Evaporation(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)
@@ -244,7 +276,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_Temperature() {
+        async publish_Temperature_Data() {
             let result = await publish_Temperature(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)
@@ -283,7 +315,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_Rainfall() {
+        async publish_Rainfall_Data() {
             let result = await publish_Rainfall(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)
@@ -322,7 +354,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_SolarRadiation() {
+        async publish_SolarRadiation_Data() {
             let result = await publish_SolarRadiation(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)
@@ -361,7 +393,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_CloudCover() {
+        async publish_CloudCover_Data() {
             let result = await publish_CloudCover(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)
@@ -400,7 +432,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_WindSpeedAndDirection() {
+        async publish_WindSpeedAndDirection_Data() {
             let result = await publish_WindSpeedAndDirection(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)
@@ -439,7 +471,7 @@ let useUpLoadDialogStore = defineStore('UpLoadDialogStore', {
             }
         },
 
-        async publish_WaterTemperature() {
+        async publish_WaterTemperature_Data() {
             let result = await publish_WaterTemperature(null)
             if (result.code == 1) {
                 this.uploadFiles.push(result.data)

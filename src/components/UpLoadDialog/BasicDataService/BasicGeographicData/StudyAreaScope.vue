@@ -157,7 +157,6 @@ const get_StudyAreaScope = async () => {
 }
 
 const handleExceed = (files: any) => {
-  console.log(files)
   ElMessage.warning('最多只能上传一个文件！');
   upload.value!.clearFiles() // 清除文件列表
   const file = files[0] as UploadRawFile
@@ -227,8 +226,7 @@ const updateLocal = async () => {
 }
 
 const publish_StudyAreaScope = async () => {
-  let result: any = await upLoadDialogStore.publish_StudyAreaScope()
-  console.log(result)
+  let result: any = await upLoadDialogStore.publish_StudyAreaScope_Data()
   if (result.code == 1) {
     upLoadDialogStore.StudyAreaScopeDialogVisible = false
   }

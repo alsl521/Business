@@ -12,28 +12,33 @@ export const useMapLayerStore = defineStore('geographicLayerStore', {
     actions: {
         //去除相同的数据
         add_file_file(data: any) {
-            let isEqual;
-            this.showLayers.forEach((item, index) => {
-                isEqual = this.isScopeEqual(item.name, data.name);
+
+            let foundMatch = false;
+
+            for (let index = 0; index < this.showLayers.length; index++) {
+                const layer = this.showLayers[index];
+                const isEqual = this.isScopeEqual(layer.name, data.name);
+
                 if (isEqual) {
                     this.showLayers[index] = data; // 替换 item
+                    foundMatch = true;
+                    break; // 退出循环
                 }
-            });
+            }
 
-            if (!isEqual) {
-                this.showLayers.push(data)
+            if (!foundMatch) {
+                this.showLayers.push(data);
             }
         },
 
         isScopeEqual(scope1: string, scope2: string): boolean {
             const scope1Suffix = scope1.split('_')[1];
             const scope2Suffix = scope2.split('_')[1];
-
             return scope1Suffix === scope2Suffix;
         },
 
         //增加到展示组
-        async increment(res: any) {
+        increment(res: any) {
             this.add_file_file(res)
         }
     },

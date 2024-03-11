@@ -330,7 +330,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate(async (valid) => {
     if (valid) {
       let result: any = await upLoadDialogStore.create_FlowRate_Table(form)
-      console.log(result)
       if (result.code == 1) {
         showPages.value = 3
         shp_Data.value = result.data.shp_data
@@ -412,8 +411,7 @@ const updateLocal = async () => {
 }
 
 const publishFlowRate = async () => {
-  let result: any = await upLoadDialogStore.publish_FlowRate()
-  console.log(result)
+  let result: any = await upLoadDialogStore.publish_FlowRate_Data()
   if (result.code == 1) {
     upLoadDialogStore.FLowRateDialogVisible = false
   }

@@ -3,44 +3,52 @@ import request from "@/utils/request";
 import type {
     dataFile,
     dataFileResponse,
-} from "@/api/UpLoadFiles/BasicDataService/BasicGeographicData/type";
+} from '@/api/UpLoadFiles/BasicDataService/MonitoringData/MeteorologyMonitoringStation/type'
 
 enum API {
+    //基础数据服务//监测数据/气象监测站点//大气压强
     UpLoad_AtmosphericPressure_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/AtmosphericPressure",
     Creat_AtmosphericPressure_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/AtmosphericPressure/Table",
     Update_AtmosphericPressure_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/AtmosphericPressure/Table",
     Publish_AtmosphericPressure = "/publish/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/AtmosphericPressure",
 
+    //基础数据服务//监测数据/气象监测站点//蒸发量
     UpLoad_Evaporation_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Evaporation",
     Creat_Evaporation_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Evaporation/Table",
     Update_Evaporation_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Evaporation/Table",
     Publish_Evaporation = "/publish/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Evaporation",
 
+    //基础数据服务//监测数据/气象监测站点//气温
     UpLoad_Temperature_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Temperature",
     Creat_Temperature_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Temperature/Table",
     Update_Temperature_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Temperature/Table",
     Publish_Temperature = "/publish/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Temperature",
 
+    //基础数据服务//监测数据/气象监测站点//降雨
     UpLoad_Rainfall_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Rainfall",
     Creat_Rainfall_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Rainfall/Table",
     Update_Rainfall_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Rainfall/Table",
     Publish_Rainfall = "/publish/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/Rainfall",
 
+    //基础数据服务//监测数据/气象监测站点//太阳辐射
     UpLoad_SolarRadiation_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/SolarRadiation",
     Creat_SolarRadiation_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/SolarRadiation/Table",
     Update_SolarRadiation_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/SolarRadiation/Table",
     Publish_SolarRadiation = "/publish/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/SolarRadiation",
 
+    //基础数据服务//监测数据/气象监测站点//云量
     UpLoad_CloudCover_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/CloudCover",
     Creat_CloudCover_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/CloudCover/Table",
     Update_CloudCover_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/CloudCover/Table",
     Publish_CloudCover = "/publish/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/CloudCover",
 
+    //基础数据服务//监测数据/气象监测站点//风速风向
     UpLoad_WindSpeedAndDirection_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/WindSpeedAndDirection",
     Creat_WindSpeedAndDirection_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/WindSpeedAndDirection/Table",
     Update_WindSpeedAndDirection_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/WindSpeedAndDirection/Table",
     Publish_WindSpeedAndDirection = "/publish/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/WindSpeedAndDirection",
 
+    //基础数据服务//监测数据/气象监测站点//水温
     UpLoad_WaterTemperature_Files = "/upLoad/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/WaterTemperature",
     Creat_WaterTemperature_Table = "/creat/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/WaterTemperature/Table",
     Update_WaterTemperature_Table = "/update/BasicDataService/MonitoringData/MeteorologicalMonitoringStation/WaterTemperature/Table",

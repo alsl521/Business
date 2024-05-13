@@ -40,6 +40,8 @@ import vtkFullScreenRenderWindow from '@kitware/vtk.js/Rendering/Misc/FullScreen
 import vtkActor from '@kitware/vtk.js/Rendering/Core/Actor';
 import vtkMapper from '@kitware/vtk.js/Rendering/Core/Mapper';
 import vtkConeSource from '@kitware/vtk.js/Filters/Sources/ConeSource';
+import vtkElevationReader from "@kitware/vtk.js/IO/Misc/ElevationReader";
+import vtkTexture from "@kitware/vtk.js/Rendering/Core/Texture";
 
 const STYLE_CONTROL_PANEL = {//控制面板样式
   width: 'calc(100%)',//宽度
@@ -73,6 +75,7 @@ watchEffect(() => {//监听圆锥分辨率和表示的变化
 
 //挂载VTK
 onMounted(() => {//挂载
+
   if (!context.value) {//如果上下文不存在
     const fullScreenRenderer = vtkFullScreenRenderWindow.newInstance({//创建vtk全屏渲染窗口
       rootContainer: vtkContainer.value,//vtk渲染容器
@@ -80,18 +83,29 @@ onMounted(() => {//挂载
     });
     const coneSource = vtkConeSource.newInstance({height: 1.0});//创建圆锥源
 
-    const mapper = vtkMapper.newInstance();//创建映射器
-    mapper.setInputConnection(coneSource.getOutputPort());//设置输入连接
-
-    const actor = vtkActor.newInstance();//创建演员
-    actor.setMapper(mapper);//设置映射器
-
     const renderer = fullScreenRenderer.getRenderer();//获取渲染器
     const renderWindow = fullScreenRenderer.getRenderWindow();//获取渲染窗口
 
-    renderer.addActor(actor);//添加演员
-    renderer.resetCamera();//重置相机
-    renderWindow.render();//渲染
+    const reader = vtkElevationReader.newInstance({
+      xSpacing: 0.01568,
+      ySpacing: 0.01568,
+      zScaling: 0.06666,
+    });
+    const mapper = vtkMapper.newInstance();
+    const actor = vtkActor.newInstance();
+
+    mapper.setInputConnection(reader.getOutputPort());
+    actor.setMapper(mapper);
+
+    renderer.addActor(actor);
+    renderer.resetCamera();
+    renderWindow.render();
+
+// Download elevation and render when ready
+    reader.setUrl(`https://kitware.github.io/vtk-js/data/elevation/dem.csv`).then(() => {
+      renderer.resetCamera();
+      renderWindow.render();
+    });
 
     context.value = {//设置上下文
       fullScreenRenderer,
